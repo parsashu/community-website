@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website Title</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Basic CSS to style the template */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1em;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+        }
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+        }
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .container {
+            padding: 20px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Third party website</h1>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <div class="container" id="rooms-container">
+        <h2>Rooms</h2>
+        <hr>
+        <div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Your Website. All rights reserved.</p>
+    </footer>
+
+</body>
+<script>
+    let roomContainer = document.getElementById('rooms-container')
+
+    let getRooms = async () => {
+        let response = await fetch('http://127.0.0.1:8000/api/rooms/')
+        let rooms = await response.json()
+        console.log('rooms:', rooms)
+
+        for(let i = 0; rooms.length > i; i++){
+            let room = rooms[i]
+
+            let row = `<div>
+                            <h3>${room.name}</h3>
+                        </div>`
+
+            roomContainer.innerHTML += row
+        }
+    }
+
+    getRooms()
+</script>
+
+
+</html>
